@@ -39,6 +39,6 @@ with open(csv_file_path, newline='') as csv_file:
             except StopIteration:
                 break
         current_row += batch_size
-        # time.sleep(3)
+#        time.sleep(3)
 
 producer.close()

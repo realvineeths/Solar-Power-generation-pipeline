@@ -20,21 +20,12 @@ start_time = datetime.now()
 
 df = spark \
     .read \
-    .jdbc(mysql_url, "streamt", properties=mysql_properties)
+    .jdbc(mysql_url, "streamt2", properties=mysql_properties)
 
 # do some calculation on TOTAL_YIELD
-df = df.select("SOURCE_KEY", "TOTAL_YIELD", (col("TOTAL_YIELD") * 2).alias("TOTAL_YIELD_MULTIPLIED_BY_2"))
+df = df.select("SOURCE_KEY", "TOTAL_YIELD", (col("TOTAL_YIELD") * 3).alias("TOTAL_YIELD_MULTIPLIED_BY_3"))
 
-# write the result to a new table in the same database
-mysql_url = "jdbc:mysql://localhost:3306/dbtproj"
-mysql_properties = {
-    "user": "root",
-    "password": "rootpass",
-    "driver": "com.mysql.jdbc.Driver"
-}
-
-
-df.write.jdbc(mysql_url, "batcht", mode="overwrite", properties=mysql_properties)
+df.write.jdbc(mysql_url, "batcht3", mode="overwrite", properties=mysql_properties)
 
 end_time = datetime.now()
 duration = end_time - start_time
